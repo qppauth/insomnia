@@ -56,18 +56,18 @@ export async function all() {
 }
 
 async function create() {
-  const user = await db.docCreate<UserSession>(type);
+  const user = await db.docCreate<UserSession>(type, { accountId: 'default_account', id: 'default_session' });
   return user;
 }
 
 export async function update(user: UserSession, patch: Partial<UserSession>) {
-  const updatedUser = await db.docUpdate<UserSession>(user, patch);
+  const updatedUser = await db.docUpdate<UserSession>(user);
   return updatedUser;
 }
 
 export async function patch(patch: Partial<UserSession>) {
   const user = await getOrCreate();
-  const updatedUser = await db.docUpdate<UserSession>(user, patch);
+  const updatedUser = await db.docUpdate<UserSession>(user);
   return updatedUser;
 }
 

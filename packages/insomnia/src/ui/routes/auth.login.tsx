@@ -161,15 +161,15 @@ const Login = () => {
             window.main.trackSegmentEvent({
               event: SegmentEvent.selectScratchpad,
             });
-            navigate('/organization/org_scratchpad/project/proj_scratchpad/workspace/wrk_scratchpad/debug');
+            navigate('/organization');
           }}
-          aria-label="Use the Scratch Pad"
+          aria-label="Use the local vault"
           className="flex justify-center gap-[--padding-xs] text-sm text-[rgba(var(--color-font-rgb),0.8)] outline-none transition-colors hover:text-[--color-font] focus:text-[--color-font]"
         >
           <div>
             <i className="fa fa-edit" />
           </div>
-          <span>Use the local Scratch Pad</span>
+          <span>Use the local vault</span>
         </Button>
       </div>
     </div>

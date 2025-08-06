@@ -185,8 +185,8 @@ const currentRole = {
 };
 
 const storageRule = {
-  enableCloudSync: true,
-  enableGitSync: true,
+  enableCloudSync: false,
+  enableGitSync: false,
   enableLocalVault: true,
   isOverridden: false,
 };

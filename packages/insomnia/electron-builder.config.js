@@ -37,7 +37,7 @@ const config = {
   },
   fileAssociations: [],
   mac: {
-    hardenedRuntime: true,
+    hardenedRuntime: false,
     category: 'public.app-category.developer-tools',
     entitlements: './build/static/entitlements.mac.inherit.plist',
     entitlementsInherit: './build/static/entitlements.mac.inherit.plist',
@@ -57,7 +57,8 @@ const config = {
       NSRequiresAquaSystemAppearance: false,
     },
     // If this step fails its possible apple has new license terms which need to be accepted by logging into https://developer.apple.com/account
-    notarize: true,
+    notarize: false,
+    sign: false,
     asarUnpack: ['node_modules/@getinsomnia/node-libcurl'],
   },
   dmg: {
@@ -89,8 +90,8 @@ const config = {
       },
     ],
     signtoolOptions: {
-      sign: './customSign.js',
-      signingHashAlgorithms: ['sha256'], // avoid duplicate signing hook calls https://github.com/electron-userland/electron-builder/issues/3995#issuecomment-505725704
+      sign: false,
+      signingHashAlgorithms: [], // avoid duplicate signing hook calls https://github.com/electron-userland/electron-builder/issues/3995#issuecomment-505725704
     },
     publish: {
       provider: 'generic',

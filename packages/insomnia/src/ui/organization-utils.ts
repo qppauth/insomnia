@@ -167,9 +167,9 @@ export async function migrateProjectsUnderOrganization(personalOrganizationId: s
 }
 
 export const DEFAULT_STORAGE_RULES = {
-  enableCloudSync: true,
+  enableCloudSync: false,
   enableLocalVault: true,
-  enableGitSync: true,
+  enableGitSync: false,
   isOverridden: false,
 };
 

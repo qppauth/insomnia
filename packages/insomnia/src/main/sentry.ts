@@ -39,24 +39,5 @@ export function sentryWatchAnalyticsEnabled() {
 // https://github.com/getsentry/sentry-electron/pull/889
 // docs: https://docs.sentry.io/platforms/javascript/guides/electron/
 export function initializeSentry() {
-  Sentry.init({
-    ...SENTRY_OPTIONS,
-    transportOptions: {
-      /**
-       * Called before we attempt to send an envelope to Sentry.
-       *
-       * If this function returns false, `shouldStore` will be called to determine if the envelope should be stored.
-       *
-       * Default: () => true
-       *
-       * @param envelope The envelope that will be sent.
-       * @returns Whether we should attempt to send the envelope
-       */
-      shouldSend: () => enabled,
-    },
-    // comment out anr integration for now (Too much reporting resulted in excess capacity usage)
-    // integrations: isDevelopment() ? [] : [
-    //   Sentry.anrIntegration({ captureStackTrace: true }),
-    // ],
-  });
+  return;
 }

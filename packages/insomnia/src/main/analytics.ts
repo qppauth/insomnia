@@ -66,90 +66,11 @@ function hashString(input: string) {
 }
 
 export async function trackSegmentEvent(event: SegmentEvent, properties?: Record<string, any>) {
-  const settings = await models.settings.getOrCreate();
-  const userSession = await models.userSession.getOrCreate();
-  if (!userSession?.hashedAccountId) {
-    userSession.hashedAccountId = userSession?.accountId ? hashString(userSession.accountId) : '';
-  }
-  const allowAnalytics = settings.enableAnalytics || userSession?.hashedAccountId;
-  if (allowAnalytics) {
-    try {
-      const anonymousId = (await getDeviceId()) ?? '';
-      const context = {
-        app: { name: getProductName(), version: getAppVersion() },
-        os: { name: _getOsName(), version: process.getSystemVersion() },
-      };
-
-      analytics.track(
-        {
-          event,
-          properties: {
-            ...properties,
-            platform: 'app',
-          },
-          context,
-          anonymousId,
-          userId: userSession?.hashedAccountId || '',
-        },
-        error => {
-          if (error) {
-            console.warn('[analytics] Error sending segment event', error);
-          }
-        },
-      );
-    } catch (error: unknown) {
-      console.warn('[analytics] Unexpected error while sending segment event', error);
-    } finally {
-      if (!userSession?.hashedAccountId && [SegmentEvent.unitTestRun, SegmentEvent.unitTestRunAll].includes(event)) {
-        Sentry.captureException(`Run tests by anonymous`, {
-          tags: {
-            source: 'main/analytics',
-          },
-          extra: {
-            organizationId: properties?.organizationId || '',
-            projectId: properties?.projectId || '',
-          },
-        });
-      }
-    }
-  }
+  return;
 }
 
 export async function trackPageView(name: string) {
-  const settings = await models.settings.getOrCreate();
-  const userSession = await models.userSession.getOrCreate();
-  if (!userSession?.hashedAccountId) {
-    userSession.hashedAccountId = userSession?.accountId ? hashString(userSession.accountId) : '';
-  }
-
-  const allowAnalytics = settings.enableAnalytics || userSession?.hashedAccountId;
-  if (allowAnalytics) {
-    try {
-      const anonymousId = (await getDeviceId()) ?? '';
-      const context = {
-        app: { name: getProductName(), version: getAppVersion() },
-        os: { name: _getOsName(), version: process.getSystemVersion() },
-      };
-
-      analytics.page({ name, context, anonymousId, userId: userSession?.hashedAccountId }, error => {
-        if (error) {
-          console.warn('[analytics] Error sending segment event', error);
-        }
-      });
-
-      if (userSession?.id) {
-        net.fetch(getApiBaseURL() + '/v1/telemetry/', {
-          method: 'POST',
-          headers: new Headers({
-            'X-Session-Id': userSession?.id,
-            'X-Insomnia-Client': getClientString(),
-          }),
-        });
-      }
-    } catch (error: unknown) {
-      console.warn('[analytics] Unexpected error while sending segment event', error);
-    }
-  }
+  return;
 }
 
 // ~~~~~~~~~~~~~~~~~ //
