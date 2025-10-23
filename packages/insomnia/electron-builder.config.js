@@ -84,7 +84,7 @@ const config = {
         target: 'squirrel',
       },
     ],
-    sign: {
+    signtoolOptions: {
       sign: './customSign.js',
       signingHashAlgorithms: ['sha256'], // avoid duplicate signing hook calls https://github.com/electron-userland/electron-builder/issues/3995#issuecomment-505725704
     },
